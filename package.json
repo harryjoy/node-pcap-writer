@@ -1,6 +1,6 @@
 {
   "name": "node-pcap-writer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A simple pcap file writer for node.",
   "main": "index.js",
   "scripts": {
