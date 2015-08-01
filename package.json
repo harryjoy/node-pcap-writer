@@ -1,0 +1,31 @@
+{
+  "name": "node-pcap-writer",
+  "version": "0.1.0",
+  "description": "A simple pcap file writer built in Node JS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harryjoy/node-pcap-writer.git"
+  },
+  "keywords": [
+    "pcap",
+    "pcap-writer"
+  ],
+  "author": {
+    "name": "Harsh Raval",
+    "email": "harshraval9@gmail.com",
+    "url": "https://github.com/harryjoy/node-pcap-writer"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harryjoy/node-pcap-writer/issues"
+  },
+  "homepage": "https://github.com/harryjoy/node-pcap-writer#readme",
+  "dependencies": {
+    "bufferpack": "0.0.6",
+    "lodash": "^3.10.0"
+  }
+}
