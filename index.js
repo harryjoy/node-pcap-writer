@@ -29,7 +29,7 @@ function PcapWriter(file, snaplen, linktype) {
  * @param  {Buffer} pkt Buffer containing data.
  * @param  {Number} ts  Timestamp [optional].
  */
-PcapWriter.prototype.writepkt = function(pkt, ts) {
+PcapWriter.prototype.writePacket = function(pkt, ts) {
   if (!ts) { // if no timestamp is provided then default to current.
     ts = (new Date()).getTime() * 1000;
   }

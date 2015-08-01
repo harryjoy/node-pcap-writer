@@ -1,7 +1,7 @@
 {
   "name": "node-pcap-writer",
   "version": "0.1.0",
-  "description": "A simple pcap file writer built in Node JS.",
+  "description": "A simple pcap file writer for node.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "pcap",
-    "pcap-writer"
+    "pcap-writer",
+    "pcap-writer-node"
   ],
   "author": {
     "name": "Harsh Raval",
