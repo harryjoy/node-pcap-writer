@@ -25,7 +25,7 @@ pcapWriter.writePacket(packetDataBuffer, timestamp)
 ```
 
 Here packetDataBuffer is [Buffer](https://nodejs.org/api/buffer.html) object of Node JS containig data of packet. 
-Timestamp needs to be in seconds.
+Timestamp needs to be in usec.
 And then finally close it:
 
 ```javascript
