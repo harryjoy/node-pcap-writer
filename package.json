@@ -27,6 +27,6 @@
   "homepage": "https://github.com/harryjoy/node-pcap-writer#readme",
   "dependencies": {
     "bufferpack": "0.0.6",
-    "lodash": "^3.10.0"
+    "lodash": "^4.17.20"
   }
 }
