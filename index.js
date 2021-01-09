@@ -17,6 +17,9 @@ var Constants = require('./lib/constants');
  */
 function PcapWriter(file, snaplen, linktype) {
   this._fs = fs.createWriteStream(file);
+  this._fs.on('error', (err) => {
+    this.error = err;
+  });
   var options = {};
   if (snaplen) { options.snaplen = snaplen; }
   if (linktype) { options.linktype = linktype; }
@@ -41,10 +44,16 @@ PcapWriter.prototype.writePacket = function(pkt, ts) {
     caplen: n,
     len: n
   });
-  // write packet header
-  this._fs.write(new Buffer(ph.toString(), Constants.HEADER_ENCODING));
-  // write packet data
-  this._fs.write(pkt);
+
+  if(undefined == this.error) {
+    // write packet header
+    this._fs.write(new Buffer(ph.toString(), Constants.HEADER_ENCODING));
+    // write packet data
+    this._fs.write(pkt);
+  }
+  else {
+    throw this.error
+  }
 };
 
 /**
