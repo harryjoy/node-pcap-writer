@@ -5,10 +5,30 @@
 
 var _ = require('lodash');
 var fs = require('fs');
+var process = require('process');
 
 var GlobalHeader = require('./lib/header/globalhdr');
 var PacketHeader = require('./lib/header/packethdr');
 var Constants = require('./lib/constants');
+
+/**
+ * Write `data` to a `stream`. if the buffer is full will block
+ * until it's flushed and ready to be written again.
+ * [see](https://nodejs.org/api/stream.html#stream_writable_write_chunk_encoding_callback)
+ */
+function lowWrite(stream, data) {
+  return new Promise((resolve, reject) => {
+    if (stream.write(data)) {
+      process.nextTick(resolve);
+    } else {
+      stream.once("drain", () => {
+        stream.off("error", reject);
+        resolve();
+      });
+      stream.once("error", reject);
+     }
+  });
+}
 
 /**
  * Initialize new pcap writer.
@@ -24,7 +44,7 @@ function PcapWriter(file, snaplen, linktype) {
   if (snaplen) { options.snaplen = snaplen; }
   if (linktype) { options.linktype = linktype; }
   // write global header.
-  this._fs.write(new Buffer((new GlobalHeader(options)).toString(), Constants.HEADER_ENCODING));
+  lowWrite(this._fs, new Buffer((new GlobalHeader(options)).toString(), Constants.HEADER_ENCODING));
 }
 
 /**
@@ -47,12 +67,12 @@ PcapWriter.prototype.writePacket = function(pkt, ts) {
 
   if(undefined == this.error) {
     // write packet header
-    this._fs.write(new Buffer(ph.toString(), Constants.HEADER_ENCODING));
+    lowWrite(this._fs, new Buffer(ph.toString(), Constants.HEADER_ENCODING));
     // write packet data
-    this._fs.write(pkt);
+    lowWrite(this._fs, pkt);
   }
   else {
-    throw this.error
+    throw this.error;
   }
 };
 
